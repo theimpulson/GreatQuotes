@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.theimpulson.greatquotes.databinding.FragmentDashboardBinding
 import dev.theimpulson.greatquotes.models.RVQuotes
@@ -34,7 +35,7 @@ class DashboardFragment : Fragment() {
         viewModel.quotesResponse.observe(viewLifecycleOwner, Observer {
             val quotesList = it.body()
             fragmentDashboardBinding.rvQuotes.adapter = quotesList?.let { it1 -> RVQuotes(it1) }
-            fragmentDashboardBinding.rvQuotes.layoutManager = LinearLayoutManager(activity)
+            fragmentDashboardBinding.rvQuotes.layoutManager = LinearLayoutManager(view.context)
         })
     }
 

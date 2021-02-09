@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Great Quotes</string>
-    <string name="quotes">Quotes</string>
+    <string name="quotes">Quote</string>
+    <string name="author">Author</string>
 </resources>

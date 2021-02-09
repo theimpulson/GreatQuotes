@@ -29,8 +29,10 @@ class RVQuotes(val quotes: ArrayList<Quotes>) : RecyclerView.Adapter<RVQuotes.Vi
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentText = quotes[position].text
+        val currentAuthor = quotes[position].author
 
         holder.binding.tvQuote.text = currentText
+        holder.binding.tvAuthor.text = currentAuthor
 
         holder.binding.btCopy.setOnClickListener {
             val clipboard = it.context.getSystemService(ClipboardManager::class.java)
