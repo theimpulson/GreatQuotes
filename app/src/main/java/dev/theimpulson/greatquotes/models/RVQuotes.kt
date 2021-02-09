@@ -2,6 +2,7 @@ package dev.theimpulson.greatquotes.models
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,13 +28,24 @@ class RVQuotes(val quotes: ArrayList<Quotes>) : RecyclerView.Adapter<RVQuotes.Vi
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvQuote.text = quotes[position].text
+        val currentText = quotes[position].text
+
+        holder.binding.tvQuote.text = currentText
 
         holder.binding.btCopy.setOnClickListener {
             val clipboard = it.context.getSystemService(ClipboardManager::class.java)
-            val clip = ClipData.newPlainText(quotes[position].toString(), quotes[position].text)
+            val clip = ClipData.newPlainText(quotes[position].toString(), currentText)
             clipboard.setPrimaryClip(clip)
             Toast.makeText(it.context, "Successfully Copied!", Toast.LENGTH_SHORT).show()
+        }
+
+        holder.binding.btShare.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, currentText)
+                type = "text/plain"
+            }
+            it.context.startActivity(Intent.createChooser(sendIntent, "Quote"))
         }
     }
 
